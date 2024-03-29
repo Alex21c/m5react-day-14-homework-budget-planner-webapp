@@ -2,7 +2,7 @@
 ![](thumbnail.png)
 
 ## Hosted Version of the Project:
-[m5react-day-14-homework-budget-planner-webapp](https://mlcToDoPrjName.vercel.app/)
+[m5react-day-14-homework-budget-planner-webapp](https://m5react-day-14-homework-budget-planner-webapp.vercel.app/)
 
 ## Project Overview:
 In this project, I've created a Budget Planner WebApp using ReactJS and the Context API. Managing personal finances is crucial, and this WebApp will provide users with a user-friendly platform to set their budgets, track expenses, and monitor their spending. By leveraging the Context API in React, i've efficiently manage state across different components, making the budget planning process intuitive and efficient.
