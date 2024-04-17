@@ -1,20 +1,69 @@
-
+import { useReducer } from "react";
+import { useState } from "react";
 import { createContext, useEffect } from "react";
-  export const ContextBudgetPlannerWebApp = createContext(null);
+export const ContextBudgetPlannerWebApp = createContext(null);
 
 
-  const ContextProviderFoodCartWebApp = ({children}) =>{
+  const ContextProviderBudgetPlannerWebApp = ({children}) =>{
 
 
-    let [stateWhoIsCurrentPage, updateStateWhoIsCurrentPage] = useState(null);
-
-
-    // useEffect() can be used to initialize and update states here as well
-    useEffect(()=>{}, []);
+    
+    function reducer(state, action){      
+      // //console.log(action.payload);
+      let previousState = state;   
+      let previousItemCost = 0;
    
+
+      switch (action.type){
+        case "removeExpense":
+          previousItemCost = Number((previousState[action.payload])?.cost);
+          // //console.log( Number(previousState['spentSoFar']), action.payload, previousState, previousState[action.payload].cost);
+          
+          
+          delete previousState[action.payload];
+          
+
+          // //console.log('removing', action);
+          // return state;
+          return {
+            ...previousState,
+            'spentSoFar': Number(previousState['spentSoFar'])-previousItemCost
+          };
+        case "AddExpense":
+        // Safeguard
+         
+          return {
+            ...state,
+            [state.nextExpenseUniqueID] : {
+              'expenseName': action.payload.expenseName,
+              'cost': Number(action.payload.cost),
+            },
+            nextExpenseUniqueID : Number([state.nextExpenseUniqueID]) +1,
+            spentSoFar: state.spentSoFar + Number(action.payload.cost) 
+
+
+          }                  
+        default:
+        return state;
+      }
+    }
+    let [stateExpenses, dispatch] = useReducer(reducer, {
+      nextExpenseUniqueID: 1,
+      spentSoFar: 0
+    });
+
+    useEffect(()=>{
+      //console.log(stateExpenses);
+    }, [stateExpenses]);
+    
+    
+    let [stateTotalBudget, updateStateTotalBudget] = useState(2000);
+
     const contextValue = {
-      stateWhoIsCurrentPage, updateStateWhoIsCurrentPage
+      stateExpenses, dispatch, stateTotalBudget
     };
+
+    
    
     return (
       <ContextBudgetPlannerWebApp.Provider value={contextValue}>
@@ -26,4 +75,4 @@ import { createContext, useEffect } from "react";
   }
 
 
-  export default ContextProviderFoodCartWebApp;
+  export default ContextProviderBudgetPlannerWebApp;

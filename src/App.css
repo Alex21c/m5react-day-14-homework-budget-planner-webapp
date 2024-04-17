@@ -24,4 +24,27 @@ body{
 
 }
 
+@media screen and (max-width: 1157px){
+  div.wrapperBudgetPlannerWebApp{
+    width: 97%;
+  }
+}
+
+
+@media screen and (max-width: 1157px){
+  div.wrapperAddExpenseAndBudgetDivs{
+    flex-direction: column;
+  }
+}
+
+
+
+@media screen and (max-width: 364px){
+  div.wrapperThreeDivsBudget, form.formAddExpense{
+    width: 100%;
+    
+  }
+}
+
+
 
