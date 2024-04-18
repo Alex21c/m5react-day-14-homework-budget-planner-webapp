@@ -10,10 +10,16 @@ export default function AddExpense({updateStateOpenSnackBar}){
     // console.log(ContextBudgetPlannerWebApp);
   }, []);
 
-
+  function clearTheInputFields(){
+    setTimeout(()=>{
+      refExpenseName.current.value="";
+      refCost.current.value="";
+    }, [1000]);
+  }
 
   function handleRequestAddExpense(event){
     event.preventDefault();
+    clearTheInputFields();
     if(refExpenseName.current.value === "" || refCost.current.value===""){
       return;
     }
