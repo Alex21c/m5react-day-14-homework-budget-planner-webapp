@@ -47,13 +47,22 @@ export const ContextBudgetPlannerWebApp = createContext(null);
         return state;
       }
     }
-    let [stateExpenses, dispatch] = useReducer(reducer, {
-      nextExpenseUniqueID: 1,
-      spentSoFar: 0
-    });
+
+    let initialState = localStorage.getItem('alex21cBudgetPlannerWebApp');
+    if(initialState){
+      initialState = JSON.parse(initialState);
+    }else{
+      initialState ={
+        nextExpenseUniqueID: 1,
+        spentSoFar: 0
+      }
+    }
+    let [stateExpenses, dispatch] = useReducer(reducer, initialState);
 
     useEffect(()=>{
       //console.log(stateExpenses);
+      localStorage.setItem ('alex21cBudgetPlannerWebApp', JSON.stringify(stateExpenses));
+
     }, [stateExpenses]);
     
     
